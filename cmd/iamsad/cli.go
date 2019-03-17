@@ -41,7 +41,7 @@ func main() {
 			Usage: "Given a breed, list the available sub breeds",
 			Flags: breedFlags,
 			Action: func(c *cli.Context) error {
-				subbreeds := dog.SubBreeds("hound")
+				subbreeds := dog.SubBreeds(c.String("breed"))
 
 				fmt.Println(subbreeds)
 				return nil
