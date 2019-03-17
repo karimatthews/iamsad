@@ -13,12 +13,6 @@ import (
 // Dog struct (empty)
 type Dog struct{}
 
-// SubBreedsResponse struct
-type SubBreedsResponse struct {
-	Status    string   `json:"status"`
-	SubBreeds []string `json:"message"`
-}
-
 // BreedsResponse struct
 type BreedsResponse struct {
 	Breeds map[string][]string `json:"message"`
@@ -52,6 +46,12 @@ func (Dog) Breeds() []string {
 	return keys
 }
 
+// SubBreedsResponse struct
+type SubBreedsResponse struct {
+	Status    string   `json:"status"`
+	SubBreeds []string `json:"message"`
+}
+
 // SubBreeds function
 func (Dog) SubBreeds(breed string) []string {
 	response, err := http.Get("https://dog.ceo/api/breed/" + breed + "/list")
@@ -69,4 +69,29 @@ func (Dog) SubBreeds(breed string) []string {
 	json.Unmarshal(responseData, &responseObject)
 
 	return responseObject.SubBreeds
+}
+
+// RandomPhotoResponse struct
+type RandomPhotoResponse struct {
+	Photo string `json:"message"`
+}
+
+// RandomPhoto function
+func (Dog) RandomPhoto() string {
+	response, err := http.Get("https://dog.ceo/api/breeds/image/random")
+
+	if err != nil {
+		fmt.Print(err.Error())
+		os.Exit(1)
+	}
+
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var responseObject RandomPhotoResponse
+	json.Unmarshal(responseData, &responseObject)
+
+	return responseObject.Photo
 }

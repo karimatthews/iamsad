@@ -45,6 +45,16 @@ func main() {
 				return nil
 			},
 		},
+		{
+			Name:  "photo",
+			Usage: "Show a random photo of a dog!",
+			Action: func(c *cli.Context) error {
+				photo := dog.RandomPhoto()
+
+				fmt.Println(photo)
+				return nil
+			},
+		},
 	}
 
 	// start our application
