@@ -76,9 +76,15 @@ type RandomPhotoResponse struct {
 	Photo string `json:"message"`
 }
 
-// RandomPhoto function
-func (Dog) RandomPhoto() string {
-	response, err := http.Get("https://dog.ceo/api/breeds/image/random")
+// Photo function
+func (Dog) Photo(breed string) string {
+	var response *http.Response
+	var err error
+	if breed == "" {
+		response, err = http.Get("https://dog.ceo/api/breeds/image/random")
+	} else {
+		response, err = http.Get("https://dog.ceo/api/breed/" + breed + "/images/random")
+	}
 
 	if err != nil {
 		fmt.Print(err.Error())

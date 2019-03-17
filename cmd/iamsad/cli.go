@@ -25,6 +25,13 @@ func main() {
 		},
 	}
 
+	photoFlags := []cli.Flag{
+		cli.StringFlag{
+			Name:  "breed",
+			Value: "",
+		},
+	}
+
 	app.Commands = []cli.Command{
 		{
 			Name:  "breeds",
@@ -50,8 +57,9 @@ func main() {
 		{
 			Name:  "photo",
 			Usage: "Show a random photo of a dog!",
+			Flags: photoFlags,
 			Action: func(c *cli.Context) error {
-				photoPath := dog.RandomPhoto()
+				photoPath := dog.Photo(c.String("breed"))
 
 				res, err := http.Get(photoPath)
 				if err != nil {
