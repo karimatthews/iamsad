@@ -4,8 +4,10 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
+	imgcat "github.com/martinlindhe/imgcat/lib"
 	"github.com/urfave/cli"
 )
 
@@ -49,9 +51,14 @@ func main() {
 			Name:  "photo",
 			Usage: "Show a random photo of a dog!",
 			Action: func(c *cli.Context) error {
-				photo := dog.RandomPhoto()
+				photoPath := dog.RandomPhoto()
 
-				fmt.Println(photo)
+				res, err := http.Get(photoPath)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				imgcat.Cat(res.Body, os.Stdout)
 				return nil
 			},
 		},

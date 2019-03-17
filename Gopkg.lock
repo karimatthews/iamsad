@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  branch = "master"
+  digest = "1:a70ce56468ce501eb078a39b8fb6878435d38b6874b6b40476b85b336808021f"
+  name = "github.com/martinlindhe/imgcat"
+  packages = ["lib"]
+  pruneopts = "UT"
+  revision = "faa120996cdb3464fcc0615a26e78f2833cf24d2"
+
+[[projects]]
   digest = "1:b24d38b282bacf9791408a080f606370efa3d364e4b5fd9ba0f7b87786d3b679"
   name = "github.com/urfave/cli"
   packages = ["."]
@@ -12,6 +20,9 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/urfave/cli"]
+  input-imports = [
+    "github.com/martinlindhe/imgcat/lib",
+    "github.com/urfave/cli",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
