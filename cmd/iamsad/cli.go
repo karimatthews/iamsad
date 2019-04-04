@@ -17,15 +17,9 @@ func main() {
 	app.Usage = "Shows you cute things when you're feeling down."
 
 	dog := Dog{}
+	cat := Cat{}
 
 	breedFlags := []cli.Flag{
-		cli.StringFlag{
-			Name:  "breed",
-			Value: "hound",
-		},
-	}
-
-	photoFlags := []cli.Flag{
 		cli.StringFlag{
 			Name:  "breed",
 			Value: "",
@@ -34,7 +28,7 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:  "breeds",
+			Name:  "dog_breeds",
 			Usage: "List the available dog breeds",
 			Action: func(c *cli.Context) error {
 				breeds := dog.Breeds()
@@ -44,8 +38,8 @@ func main() {
 			},
 		},
 		{
-			Name:  "subbreeds",
-			Usage: "Given a breed, list the available sub breeds",
+			Name:  "dog_subbreeds",
+			Usage: "Given a Dog breed, list the available sub breeds",
 			Flags: breedFlags,
 			Action: func(c *cli.Context) error {
 				subbreeds := dog.SubBreeds(c.String("breed"))
@@ -55,11 +49,27 @@ func main() {
 			},
 		},
 		{
-			Name:  "photo",
+			Name:  "dog_photo",
 			Usage: "Show a random photo of a dog!",
-			Flags: photoFlags,
+			Flags: breedFlags,
 			Action: func(c *cli.Context) error {
 				photoPath := dog.Photo(c.String("breed"))
+
+				res, err := http.Get(photoPath)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				imgcat.Cat(res.Body, os.Stdout)
+				return nil
+			},
+		},
+		{
+			Name:  "cat_photo",
+			Usage: "Show a random photo of a cat!",
+			Flags: breedFlags,
+			Action: func(c *cli.Context) error {
+				photoPath := cat.Photo(c.String("breed"))
 
 				res, err := http.Get(photoPath)
 				if err != nil {

@@ -71,8 +71,8 @@ func (Dog) SubBreeds(breed string) []string {
 	return responseObject.SubBreeds
 }
 
-// RandomPhotoResponse struct
-type RandomPhotoResponse struct {
+// RandomDogPhotoResponse struct
+type RandomDogPhotoResponse struct {
 	Photo string `json:"message"`
 }
 
@@ -91,12 +91,14 @@ func (Dog) Photo(breed string) string {
 		os.Exit(1)
 	}
 
+	defer response.Body.Close()
+
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var responseObject RandomPhotoResponse
+	var responseObject RandomDogPhotoResponse
 	json.Unmarshal(responseData, &responseObject)
 
 	return responseObject.Photo
