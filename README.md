@@ -10,16 +10,6 @@ Note that Imgcat seems to have issues working with tmux.
 
 ## Usage
 
-Clone the repo and then run:
-
-```sh
-  cd cmd/iamsad
-  # Build the binary
-  go build
-  #  Get usage options
-  ./iamssad -h
-```
-
 1. Download the binary `bin/iamsad`.
 1. Give the binary executable permissions: `chmod +x ./iamsad`
 1. Run `.iamsad -h` to see possible commands
