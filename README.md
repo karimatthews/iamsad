@@ -2,9 +2,15 @@
 
 A simple command line tool that shows you pictures of dogs.
 
+## Dependencies (Important!)
+
+This tool is depenedent on [imgcat](https://github.com/martinlindhe/imgcat), which allows you to cat images in [iTerm2](https://www.iterm2.com/).
+This means the tool needs to be used with iTerm2.
+Note that Imgcat seems to have issues working with tmux.
+
 ## Usage
 
-From the root directory run:
+Clone the repo and then run:
 
 ```sh
   cd cmd/iamsad
@@ -14,12 +20,14 @@ From the root directory run:
   ./iamssad -h
 ```
 
-Alternatively you can just download the binary `iamsad`.
+1. Download the binary `bin/iamsad`.
+1. Give the binary executable permissions: `chmod +x ./iamsad`
+1. Run `.iamsad -h` to see possible commands
 
 ## To Do
 
 - [ ] Organise project stucture better
-- [ ] Add option to show cats as well
+- [ ] Extend cat features
 - [ ] Add tests
 
 ## Features
